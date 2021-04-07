@@ -1,0 +1,12 @@
+.git
+.gradle
+.idea
+bin
+build
+classes
+data
+gradle
+*.class
+*.classpath
+*.jar
+*.log
