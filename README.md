@@ -48,3 +48,22 @@ curl --location --request POST 'localhost:8080/urls/send' --header 'Content-Type
 
 @token@ - a valid token stored for some of the server's users
 URL1, URL2, ..., URLn - URLs for download.
+
+# Build
+To build the code you have to have a stable Internet connection. Then run:
+gradlew build
+
+Gradle Wrapper tool will download the most relevant gradle version, download the main third parties and its dependencies
+
+# Put into a Docker container
+To put the build into a Docker container, first you have to have Docker installed and running as a service. Please check
+whether your user is part of the Docker group, so you're able to build and run the container.
+
+To build the container you can use the provided Dockerfile. It prepares a Docker image, downloading the latest Java 8,
+install some packages that java needs to recognize the files MIME type. The API server recognize image file is using
+Files.probeContentType() which needs some MIME types installed. The default Java 8 image have no MIME types installed.
+To build a Docker image navigate to the project's root directory (the path where Dockerfile is) and run:
+docker build . 
+or
+docker build -t <choose-an-image-name> .
+
