@@ -50,7 +50,10 @@ curl --location --request POST 'localhost:8080/urls/send' --header 'Content-Type
 URL1, URL2, ..., URLn - URLs for download.
 
 # Build
-To build the code you have to have a stable Internet connection. Then run:
+To build the code you have to have:
+- stable Internet connection (some third parties are downloaded)
+- Java 8 or Java 11 installed. I didn't test it with latest version
+Then run:
 gradlew build
 
 Gradle Wrapper tool will download the most relevant gradle version, download the main third parties and its dependencies
