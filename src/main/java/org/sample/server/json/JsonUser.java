@@ -2,6 +2,9 @@ package org.sample.server.json;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 
+/**
+ * An object representing Json format for User and its token
+ */
 public class JsonUser {
     private final String username;
     private final String token;

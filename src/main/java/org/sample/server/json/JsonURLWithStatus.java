@@ -3,6 +3,9 @@ package org.sample.server.json;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import org.sample.server.url.URLStatus;
 
+/**
+ * An object that represent a Json format of the URLs with their status
+ */
 public class JsonURLWithStatus extends JsonURL {
     private final URLStatus urlStatus;
 

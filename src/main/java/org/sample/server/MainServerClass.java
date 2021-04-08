@@ -17,14 +17,18 @@ public class MainServerClass {
 
     public static void main(String[] args) {
         try {
+            // In a very first start create directory structure and persistent URL and User files
             Constants.createDataFilesIfNotExist();
 
+            // Load data from  URLs and Users file
             URLsMap.readURLsFromFile();
             UsersList.readUsersFromFile();
 
+            // Run a timer threads which checks every 10 seconds for newly stored URLs into the in memory struct
             Thread timerTask = new ProcessURLsTimerThread();
             timerTask.start();
 
+            // Start server
             SpringApplication.run(MainServerClass.class, args);
         } catch (IOException ioException) {
             logger.error("Can not read URLs data file! ", ioException);

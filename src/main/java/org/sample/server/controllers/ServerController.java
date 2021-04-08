@@ -15,16 +15,31 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
 
+/**
+ * A controller to process URLs. It reads a Json array of URLs and store them in memory or
+ * returns a Json list of all of the in memory stored URLs
+ */
 @RestController
 public class ServerController {
     private static final Logger logger = LoggerFactory.getLogger(ServerController.class);
 
+    /**
+     * A method which reads Json array of URLs and store it into a in memory structure
+     *
+     * @param jsonURLS json array representation of URLs which have to be processed
+     * @return in case of successful processing returns the same json array
+     */
     @RequestMapping("/urls/send")
     public ResponseEntity<List<JsonURL>> readURLs(@RequestBody List<JsonURL> jsonURLS) {
         jsonURLS.forEach(this::storeURLs);
         return ResponseEntity.ok(jsonURLS);
     }
 
+    /**
+     * Reads the stored in memory URLs and returns a json array containing the URL and the current status
+     *
+     * @return a json array with the URL and its processing status
+     */
     @RequestMapping("/urls/get")
     public ResponseEntity<List<JsonURLWithStatus>> getURLs() {
         return ResponseEntity.ok(URLsMap.asJsonList());

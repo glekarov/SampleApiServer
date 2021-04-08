@@ -21,18 +21,37 @@ public class Constants {
     private static final File USERS_FILE = new File(DATA_DIR_NAME + File.separator + USERS_FILE_NAME);
     private static final File DOWNLOAD_DIR_PATH = new File(DATA_DIR_NAME + File.separator + DOWNLOAD_DIR_NAME);
 
+    /**
+     * Path to the URLs file
+     * @return a File with the path to the URLs data file
+     */
     public static File getUrlsFile() {
         return URLS_FILE;
     }
 
+    /**
+     * Path to the Users file
+     * @return a File with the path to the Users data file
+     */
     public static File getUsersFile() {
         return USERS_FILE;
     }
 
+    /**
+     * Path to the 'download' directory
+     * @return a File with the path to the directory where the files will be downloaded
+     */
     public static File getDownloadDirPath() {
         return DOWNLOAD_DIR_PATH;
     }
 
+    /**
+     * Use this only in the startup to create all directories and files structure.
+     * If the directory and files already exist this method does nothing. It creates
+     * all the necessary file structure during the very first start of the server.
+     *
+     * @throws IOException an error occurred during the directory or file creation.
+     */
     public static void createDataFilesIfNotExist() throws IOException {
         logger.debug("Create download directory path if not exists");
         DOWNLOAD_DIR_PATH.mkdirs();
@@ -48,6 +67,14 @@ public class Constants {
         }
     }
 
+    /**
+     * Reads already stored URLs from data file.
+     *
+     * @param file the name of the file to be read
+     * @return an Object with the data structure stored into the file
+     * @throws IOException An error has occurred during the data file reading
+     * @throws ClassNotFoundException The class of the stored data is missing
+     */
     public static Object readObjectFromFile(final File file) throws IOException, ClassNotFoundException {
         logger.debug("Read Object file and process its data");
 
@@ -62,6 +89,13 @@ public class Constants {
         return null;
     }
 
+    /**
+     * Write an object into the specified file.
+     *
+     * @param object object to be stored in file
+     * @param file the File where the object will be stored
+     * @throws IOException An error has occurred during the data file writing
+     */
     public static void writeObjectToFile(Object object, final File file) throws IOException {
         logger.debug("Write URLs map into a file");
 
@@ -72,10 +106,21 @@ public class Constants {
         }
     }
 
+    /**
+     * From the given URL gets the path where the file in the URL will be stored
+     *
+     * @param url an absolute URL giving the base location of the file
+     * @return a File containing the file name and the path where the fill will be stored
+     */
     public static File getDownloadUrlFile(URL url) {
         return new File(getDownloadDirPath() + File.separator + getFileName(url));
     }
 
+    /**
+     * Extract the file name from a given URL
+     * @param url an absolute URL giving the base location of the file
+     * @return the name of the file
+     */
     private static synchronized String getFileName(URL url) {
         String urlPath = url.getPath();
         return urlPath.substring(urlPath.lastIndexOf('/') + 1);

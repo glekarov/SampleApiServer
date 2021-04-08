@@ -25,7 +25,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated() // the rest need to be authenticated
                 .and().exceptionHandling().authenticationEntryPoint(authEntryPoint).and().sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS); // make the session stateless, so it doesn't
-        // store any user state
+                                                                         // store any user state
 
         // Add a filter to validate the tokens with every request
         httpSecurity.addFilterBefore(authRequestFilter, UsernamePasswordAuthenticationFilter.class);

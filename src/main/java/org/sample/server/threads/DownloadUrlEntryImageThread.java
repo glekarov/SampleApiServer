@@ -14,6 +14,9 @@ import java.nio.channels.ReadableByteChannel;
 import java.nio.file.Files;
 import java.util.concurrent.ConcurrentHashMap;
 
+/**
+ * A thread that downloads URL from an URL entry
+ */
 public class DownloadUrlEntryImageThread extends Thread {
     private static final Logger logger = LoggerFactory.getLogger(DownloadUrlEntryImageThread.class);
 
@@ -30,6 +33,7 @@ public class DownloadUrlEntryImageThread extends Thread {
 
             final File file = Constants.getDownloadUrlFile(url);
 
+            // Download the file from the given URL and update the element status according to steps
             try (FileOutputStream fos = new FileOutputStream(file)) {
                 urlEntry.setValue(URLStatus.PROCESSING);
 
@@ -46,6 +50,8 @@ public class DownloadUrlEntryImageThread extends Thread {
                 return;
             }
 
+            // Validate whether the downloaded file is an image. If not - delete the file and update
+            // the URL element status
             try {
                 logger.debug("Get downloaded file MIME type");
                 String fileMimeType = Files.probeContentType(file.toPath());

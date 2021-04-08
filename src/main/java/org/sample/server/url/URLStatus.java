@@ -1,8 +1,23 @@
 package org.sample.server.url;
 
+/**
+ * Status of already stored URLs
+ */
 public enum URLStatus {
-    STORED, // URL is stored and waiting for download
-    PROCESSING, // URL is already downloading
-    PROCESSED, // URL is processed and the data is downloaded
-    REMOVED // Not an image - remove this file
+    /**
+     * URL is stored and waiting for download
+     */
+    STORED,
+    /**
+     * URL is already downloading
+     */
+    PROCESSING,
+    /**
+     * URL is processed and the data is downloaded
+     */
+    PROCESSED,
+    /**
+     * Downloaded URL is not an image and the file was deleted
+     */
+    REMOVED
 }

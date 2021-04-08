@@ -3,6 +3,9 @@ package org.sample.server.auth;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.User;
 
+/**
+ * An object extending the User information with a token in addition
+ */
 public class AuthUser extends User {
     private String token;
 

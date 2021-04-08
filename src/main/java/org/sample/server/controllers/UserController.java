@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.RestController;
 import java.io.IOException;
 import java.util.UUID;
 
+/**
+ * Controller class which manage the server's users
+ */
 @RestController
 public class UserController {
     private static final Logger logger = LoggerFactory.getLogger(UserController.class);
@@ -19,6 +22,14 @@ public class UserController {
     private static final String USERNAME = "username";
     private static final String PASSWORD = "password";
 
+    /**
+     * Generates and store a token for particular user. This method authenticates the user and generates
+     * token only for user who has passed the correct credentials
+     *
+     * @param username a username of the authenticated user
+     * @param passwd a password of the authenticated user
+     * @return a Json object containing the username and the token
+     */
     @PostMapping("/user/token")
     public JsonUser getToken(@RequestParam(USERNAME) String username, @RequestParam(PASSWORD) String passwd) {
         logger.info("Add token for : " + username);
@@ -38,6 +49,12 @@ public class UserController {
         return null;
     }
 
+    /**
+     * Add a new user into the server. The user will be persisted and it'll be available after a restart
+     *
+     * @param username a username of the user to create
+     * @param passwd a password of the user to create
+     */
     @PostMapping("/user/add_user")
     public void addUser(@RequestParam(USERNAME) String username, @RequestParam(PASSWORD) String passwd) {
         logger.info("Add user: " + username);
